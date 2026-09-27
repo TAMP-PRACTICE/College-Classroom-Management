@@ -15,11 +15,11 @@ const teacherSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    subject:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Subject",
-        required:true
-    },
+    // subject:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:"Subject",
+    //     // required:true
+    // },
 
 
 },
