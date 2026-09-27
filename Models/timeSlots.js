@@ -9,6 +9,12 @@ const timeSlotsSchema=mongoose.Schema({
     entTime:{
         type:String,
         required:true
+    },
+    status:{
+        type:String,
+        required:true,
+        enum:["available","occupied"],
+        default:"available"
     }
 },{
     timestamps:true

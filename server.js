@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 // const{ connectDb} = require('./utils/dbConnect')
 const cookieparser  = require('cookie-parser')
 // const teacherRoute = require('./router/teacherRoute')
-// const studentRoute = require('./router/studentRoute')
+ const studentRoute = require('./router/studentRoute.js')
 // const loginRoute = require('./router/loginRoute')
 // const adminDashBoard = require('./router/adminDashBoard')
 app.use(cookieparser());
@@ -31,7 +31,7 @@ app.get('/',(req,res)=>{
     
 })
 // app.use('/teacher', teacherRoute);
-// app.use('/student', studentRoute);
+ app.use('/student', studentRoute);
 // app.use('/login', loginRoute);
 // app.use('/admin', adminDashBoard);
 

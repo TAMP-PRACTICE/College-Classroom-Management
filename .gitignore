@@ -1,7 +1,11 @@
 <<<<<<< HEAD
 node_modules/
 .env
+package.json
+package-lock.json
+
 =======
 .env
 node_modules/
 >>>>>>> Aditya
+
