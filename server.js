@@ -8,7 +8,7 @@ const Teacher = require('./Models/teacher')
 const cookieparser  = require('cookie-parser')
 const Class = require('./Models/class')
 // const teacherRoute = require('./router/teacherRoute')
-// const studentRoute = require('./router/studentRoute')
+ const studentRoute = require('./router/studentRoute.js')
 // const loginRoute = require('./router/loginRoute')
 const adminDashBoard = require('./router/adminDashBoard')
 app.use(cookieparser());
@@ -78,7 +78,7 @@ app.get('/add1yearsubject',async(req,res)=>{
     
 })
 // app.use('/teacher', teacherRoute);
-// app.use('/student', studentRoute);
+ app.use('/student', studentRoute);
 // app.use('/login', loginRoute);
 
 app.use('/admin', adminDashBoard);
