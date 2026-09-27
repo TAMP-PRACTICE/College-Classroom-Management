@@ -9,7 +9,7 @@ const studentSchema=mongoose.Schema({
     class:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Class",
-        // required:true
+        required:true
     },
     rollNo:{
         type:Number,

@@ -18,7 +18,7 @@ const teacherSchema=mongoose.Schema({
     subject:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Subject",
-        // required:true
+        required:true
     },
 
 
