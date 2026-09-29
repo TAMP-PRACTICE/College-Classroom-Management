@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, InputGroup, Card } from 'react-bootstrap';
-
-
 const Login = () => {
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
@@ -17,17 +15,19 @@ const Login = () => {
   return (
     <div>
         <Container fluid>
-            <Row className='my-5'>
-                <Col>
+            <Row className=''>
+                <Col >
                     <div
   style={{
     backgroundImage: "url('/sidepanel.png')",
     backgroundSize: "cover",
+     minHeight: '100vh',
+     width:"700px",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
   }}
 >
-                    <div>
+                    <div className='d-flex align-items-center justify-content-between'>
                          <div>
                         <img src="logo.png" style={{maxWidth:'100px'}} alt="" />
                     </div>
@@ -38,36 +38,68 @@ const Login = () => {
                     <div>
                      <h1 className="display-5 fw-bold text-dark lh-sm">
                  Every class and lab, <br />
-                <span className="text-primary">one clear schedule</span>
+                 <span>one</span>
+                <span className="text-primary"> clear schedule</span>
               </h1>
-              <p className="text-muted mt-2 fs-6">
-             Book classes, manage lab sessions, and view your schedule — all in one place.
+              <p style={{color:"rgb(150, 150, 150)"}} className="text-muted mt-2 fs-6">
+             Book classes, manage lab sessions, and view your schedule <br></br>
+             <span>— all in one place.</span>
            </p>
                     </div>
           
-             <Col xs={6} sm={3}>
+            
+                <Row className='d-flex align-items-center'>
+                 <Col xs={6} sm={3} className='w-auto'>
              <div className="border rounded-3 p-2 d-flex align-items-center gap-2 bg-light">
-                   <i className="bi bi-calendar-event text-secondary fs-5"></i>
+                   <i className="bi bi-calendar-event text-secondary "></i>
               <span className="lh-sm fw-medium" style={{ fontSize: '0.75rem' }}>View<br />Schedule</span>
                 </div>
               </Col>
-              <Col xs={6} sm={3}>
+                          <Col xs={6} sm={3} className='w-auto'>
                 <div className="border rounded-3 p-2 d-flex align-items-center gap-2 bg-light">
               <i className="bi bi-flask text-secondary fs-5"></i>
                  <span className="lh-sm fw-medium" style={{ fontSize: '0.75rem' }}>Manage<br />Lab Session</span>
            </div>
               </Col>
-          <Col xs={6} sm={3}>
+          <Col xs={6} sm={3} className='w-auto'>
              <div className="border rounded-3 p-2 d-flex align-items-center gap-2 bg-light">
                <i className="bi bi-arrow-repeat text-secondary fs-5"></i>
-              <span className="lh-sm fw-medium" style={{ fontSize: '0.75rem' }}>Stay<br />Updated</span>
+                 <span className="lh-sm fw-medium" style={{ fontSize: '0.75rem' }}>Stay<br />Updated</span>
+               </div>
+        
+            
+            </Col>
+             <Col xs={6} sm={3} className='w-auto'>
+             <div className="border rounded-3 p-2 d-flex align-items-center gap-2 bg-light">
+               <i className="bi bi-arrow-repeat text-secondary fs-5"></i>
+              <span className="lh-sm fw-medium" style={{ fontSize: '0.75rem' }}>No<br />Double Booking</span>
                </div>
             </Col>
+                </Row>
                 </div>
                 </Col>
                 <Col>
-                 <Form onSubmit={handleSubmit}>
-          
+                <Row className='d-flex flex-column'>
+                  <Col className='d-flex justify-content-end my-4'>
+                    <div>
+                         <span style={{color:"rgb(150, 150, 150)"}} className="text-muted small d-none d-sm-inline">Learn • Grow • Succeed</span>
+                    </div>
+                  </Col>
+                  <Col>
+                    <h3 style={{color:"rgb(80, 101, 255)"}}>Welcome Back!!</h3>
+                    <h1 style={{color:"rgb(43, 58, 103)"}}>Login to your Account</h1>
+                    <p style={{color:"rgb(150, 150, 150)"}} className='text-muted'>Your classes,sessions and schedule<br></br>-all in one place.</p>
+                  </Col>
+                  <Col className='d-flex justify-content-center gap-3'>
+                      <Button className='rounded-4 p-2 px-4 ' style={
+                        {
+                          backgroundColor:"rgb(43, 58, 103)"
+                        }
+                      }><i class="bi bi-mortarboard-fill"></i> Students</Button>
+                       <Button className='rounded-4 p-2 px-4 bg-light ' style={{color:"rgb(150, 150, 150)"}} ><i style={{color:"rgb(150, 150, 150)"}} class="bi bi-person-fill"></i>Teachers</Button>
+                  </Col>
+                  <Col>
+                      <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-semibold text-dark small">Email Address</Form.Label>
                   <InputGroup className="rounded-3 border overflow-hidden">
@@ -133,6 +165,9 @@ const Login = () => {
                   Not here? <a href="#admin" className="text-primary text-decoration-none">Contact to Admin</a>
                 </small>
               </div>
+                  </Col>
+                </Row>
+             
                 </Col>
             </Row>
 
