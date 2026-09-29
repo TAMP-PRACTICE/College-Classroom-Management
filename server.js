@@ -4,7 +4,6 @@ const app = express();
 const mongoose = require('mongoose');
 const Student = require('./Models/student')
 const Teacher = require('./Models/teacher')
-// const{ connectDb} = require('./utils/dbConnect')
 const cookieparser  = require('cookie-parser')
 const Class = require('./Models/class')
 // const teacherRoute = require('./router/teacherRoute')
