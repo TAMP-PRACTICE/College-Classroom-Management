@@ -28,8 +28,12 @@ const studentSchema=mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Subject",
         required:true
+    },resetPasswordToken:{
+        type :String,
+    },
+    resetPasswordTime:{
+        type :Date
     }
-
 },
 {
     timestamps:true
