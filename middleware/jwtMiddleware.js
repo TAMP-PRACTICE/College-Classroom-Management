@@ -11,6 +11,7 @@ const jwtStudentMiddleware=async(req,res,next)=>{
 
     try{
         const student=jwt.verify(studentLoginToken,secretKey);
+        req.studentLogin=student;
         console.log("Login Token verified");
         next();
 

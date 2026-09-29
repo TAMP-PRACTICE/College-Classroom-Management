@@ -36,6 +36,11 @@ const timeSlotsSchema=mongoose.Schema({
         required:true,
         enum:["available","occupied"],
         default:"available"
+    },
+    class:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Class",
+        required:true
     }
 },{
     timestamps:true
