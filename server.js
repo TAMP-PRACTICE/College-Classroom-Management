@@ -8,6 +8,7 @@ const Teacher = require('./Models/teacher')
 const cookieparser  = require('cookie-parser')
 const Class = require('./Models/class')
 // const teacherRoute = require('./router/teacherRoute')
+const Subject = require('./Models/subject')
  const studentRoute = require('./router/studentRoute.js')
 // const loginRoute = require('./router/loginRoute')
 const adminDashBoard = require('./router/adminDashBoard')
@@ -20,7 +21,7 @@ connectDb().
 then(()=>{
     console.log(`Db connected successfully`)
 }).catch((err)=>{
-    console.log('errror occur during db connnection');
+    console.log('errror occur during db connnection' + err.message);
     
 })
 
@@ -30,7 +31,7 @@ async function connectDb(){
 
 app.get('/addclasses',async (req,res)=>{
     try{
-        Class.insertMany({
+    Class.insertMany([{
     "className": "BCA 1st Year"
   },
   {
@@ -44,9 +45,9 @@ app.get('/addclasses',async (req,res)=>{
   },
   {
     "className": "MCA 2nd Year"
-  }
+  }]
 )
-console.log('added class successfully');
+console.log('added class successfullyyyyyyyyy');
 
 //   const Admin = new Teacher({
 //         teacherName:'administration',
@@ -66,10 +67,32 @@ console.log('added class successfully');
 
 app.get('/add1yearsubject',async(req,res)=>{
     try {
-        const firstyearclass =await Class.find();
+        const firstyearclass =await Class.findOne({"className": "BCA 1st Year"});
         console.log(firstyearclass._id);
         console.log('hello');
-        res.send(firstyearclass)
+       
+       Subject.insertMany([
+  {
+    subjectName: "Programming in C",
+    classId: firstyearclass._id
+  },
+  {
+    subjectName: "Computer Fundamentals",
+    classId: firstyearclass._id 
+  },
+  {
+    subjectName: "Mathematics-I",
+    classId: firstyearclass._id
+  },
+  {
+    subjectName: "Digital Electronics",
+    classId: firstyearclass._id
+  },
+  {
+    subjectName: "Communication Skills",
+    classId: firstyearclass._id
+  }
+]);
         
     } catch (err) {
         console.log(err.message);
