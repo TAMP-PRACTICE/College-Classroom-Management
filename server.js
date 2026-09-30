@@ -14,6 +14,7 @@ const Timeslots=require("./Models/timeSlots.js")
 const cookieparser  = require('cookie-parser')
 const Class = require('./Models/class')
 // const teacherRoute = require('./router/teacherRoute')
+const Subject = require('./Models/subject')
  const studentRoute = require('./router/studentRoute.js')
 // const loginRoute = require('./router/loginRoute')
 const adminDashBoard = require('./router/adminDashBoard')
@@ -26,13 +27,37 @@ connectDb().
 then(()=>{
     console.log(`Db connected successfully`)
 }).catch((err)=>{
+
+    console.log('errror occur during db connnection' + err.message);
     console.log('errror occur during db connnection',err);
+
     
 })
 
 async function connectDb(){
             await mongoose.connect(process.env.MONGO_URI)
 }
+
+
+// app.get('/addclasses',async (req,res)=>{
+//     try{
+//     Class.insertMany([{
+//     "className": "BCA 1st Year"
+//   },
+//   {
+//     "className": "BCA 2nd Year"
+//   },
+//   {
+//     "className": "BCA 3rd Year"
+//   },
+//   {
+//     "className": "MCA 1st Year"
+//   },
+//   {
+//     "className": "MCA 2nd Year"
+//   }]
+// )
+// console.log('added class successfully');
 
 // app.get('/addclasses',async (req,res)=>{
 //     try{
@@ -54,6 +79,7 @@ async function connectDb(){
 // )
 // console.log('added class successfully');
 
+
 //   const Admin = new Teacher({
 //         teacherName:'administration',
 //         email:'administration@gmail.com',
@@ -71,6 +97,35 @@ async function connectDb(){
 //     }
 // })
 
+
+// app.get('/add1yearsubject',async(req,res)=>{
+//     try {
+//         const firstyearclass =await Class.findOne({"className": "BCA 1st Year"});
+//         console.log(firstyearclass._id);
+//         console.log('hello');
+       
+//        Subject.insertMany([
+//   {
+//     subjectName: "Programming in C",
+//     classId: firstyearclass._id
+//   },
+//   {
+//     subjectName: "Computer Fundamentals",
+//     classId: firstyearclass._id 
+//   },
+//   {
+//     subjectName: "Mathematics-I",
+//     classId: firstyearclass._id
+//   },
+//   {
+//     subjectName: "Digital Electronics",
+//     classId: firstyearclass._id
+//   },
+//   {
+//     subjectName: "Communication Skills",
+//     classId: firstyearclass._id
+//   }
+// ]);
 // app.get("/addslots",async(req,res)=>{
 //     try{
 
@@ -124,6 +179,7 @@ async function connectDb(){
 //     try {
 //         const secondyearclass =await Class.findOne({className:"MCA 2nd Year"});
 //         console.log(secondyearclass._id);
+
         
 //         await Subject.insertMany( [
 //     {
