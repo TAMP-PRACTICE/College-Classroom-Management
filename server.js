@@ -1,15 +1,16 @@
-
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 const express = require('express');
 require('dotenv').config();
 
 const app = express();
 const mongoose = require('mongoose');
-// const Student = require('./Models/student')
-// const Teacher = require('./Models/teacher')
-// const Subject=require("./Models/subject.js");
-// const Room=require("./Models/room.js")
-// const Timeslots=require("./Models/timeSlots.js")
-// const{ connectDb} = require('./utils/dbConnect')
+const Student = require('./Models/student')
+const Teacher = require('./Models/teacher')
+const Subject=require("./Models/subject.js");
+const Room=require("./Models/room.js")
+const Timeslots=require("./Models/timeSlots.js")
+//const{ connectDb} = require('./utils/dbConnect')
 const cookieparser  = require('cookie-parser')
 const Class = require('./Models/class')
 // const teacherRoute = require('./router/teacherRoute')
@@ -173,17 +174,30 @@ const {statuscode=400,message='someThing went wrong'} = err;
 //     try{
 //         const {startTime,endTime,className}=req.body;
 //         const classData=await Class.findOne({className:className})
-//         const slots=await Timeslots.findOne({class:classData._id});
+//         const slots=await Timeslots.findOne({startTime:startTime,class:classData._id});
 
 //         if(!slots){
 //           return  res.send("Wrong slot choosen");
 //         }
 
 //         if(slots.status=="available"){
-//             return res.send("Slot alloted");
+
+//             //check available rooms
+//             const rooms=await Room.find({status:"available"});
+//             if(rooms.length==0)
+//             {
+//                 return res.send("Sorry no room is available for the slot time ")
+//             }
+//             const allocatedRoom=rooms[0].roomNumber;
+
+//             await Timeslots.updateOne({_id:slots._id},{$set:{status:"occupied"}})
+//             return res.send("Slot alloted and room ");
 //         }
+
+//         return res.send("Slot already occupied please try another slot")
 //     }catch(err){
-//         res.send("Error occured in slot allocation",err);
+//         console.log("Error in time slots allocation",err)
+//         res.send("Error occured in slot allocation");
 //     }
 
         
@@ -194,3 +208,5 @@ app.listen(process.env.PORT,()=>{
     console.log(`Server is listening on port ${process.env.PORT}`);
     
 })
+
+
