@@ -6,22 +6,24 @@ const Subject=require("../Models/subject.js");
 module.exports.RegisterStudent = async (req, res) => {
     try {
 
-        const { studentName, email, classId ,rollNo, password } = req.body;
-
+        const { studentName, email, classId , subject, rollNo, password } = req.body;
         const isAlreadyRegister =await Student.findOne({email});
 
-        if(isAlreadyRegister)return res.status(403).json({message:'This email is already registered'})
-
-            console.log(typeof(process.env.SALT_ROUND));
+        if(isAlreadyRegister)return res.status(403).json({message:'This emai is already registered'})
         const hashedPassword =await bcrypt.hash(password,Number(process.env.SALT_ROUND))
         const newStudent = new Student({
             studentName,
-             email, 
-             rollNo,
-             password: hashedPassword
+            email, 
+            rollNo,
+            password: hashedPassword
         })
-       const classs =  await Class.findOne({className: classId });
-       newStudent.classId = classs._id;
+       const classs =  await Class.findOne({ ClassName: classId });
+       const studentSubject = await Subject.findOne({ subjectName: subject, classId: classs._id });
+       if(!studentSubject){
+        return res.status(404).json({message:'This subject is not available for this class'})
+       }
+       newStudent.subject = studentSubject._id;
+       newStudent.class = classs._id;
         console.log('after student instance')
 
        
