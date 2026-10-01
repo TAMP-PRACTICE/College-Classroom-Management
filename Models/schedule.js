@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 
 const scheduleSchema=mongoose.Schema({
-   class:{
+   classId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"Class",
     required:true

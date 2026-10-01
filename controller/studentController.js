@@ -4,6 +4,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const transporter = require("../config/nodemailer.js");
 const crypto = require("crypto");
+const secretKey=process.env.secretKey;
 
 const studentLogin = async (req, res) => {
   const { email, password } = req.body;

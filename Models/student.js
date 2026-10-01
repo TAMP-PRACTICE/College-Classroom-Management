@@ -6,7 +6,7 @@ const studentSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    class:{
+    classId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Class",
         required:true
@@ -26,8 +26,7 @@ const studentSchema=mongoose.Schema({
     },
     subject:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Subject",
-        required:true
+        ref:"Subject"
     },
     resetPasswordToken:{
         type :String,

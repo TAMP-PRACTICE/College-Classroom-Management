@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 const {RegisterStudent} = require('../controller/adminDashBoardController')
 
-router.get('/',RegisterStudent)
+router.post('/',RegisterStudent)
 
 module.exports = router;
