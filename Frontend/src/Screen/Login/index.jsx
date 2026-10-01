@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, InputGroup, Card } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 const Login = () => {
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
@@ -148,9 +149,9 @@ const Login = () => {
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
                   />
-                  <a href="#forgot" className="text-primary text-decoration-none small">
+                  <Link to="/forgot-password" className="text-primary text-decoration-none small">
                     Forget Password?
-                  </a>
+                  </Link>
                 </div>
                 <Button
                   type="submit"
@@ -162,7 +163,7 @@ const Login = () => {
               </Form>
                 <div className="text-center mt-4">
                 <small className="text-muted">
-                  Not here? <a href="#admin" className="text-primary text-decoration-none">Contact to Admin</a>
+                  Not here? <Link to="/contact-admin" className="text-primary text-decoration-none">Contact to Admin</Link>
                 </small>
               </div>
                   </Col>
