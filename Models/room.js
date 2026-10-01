@@ -8,6 +8,7 @@ const roomSchema=mongoose.Schema({
     status:{
         type:String,
         enum:["available", "occupied"],
+        default:"available",
         required:true
     }
 },
