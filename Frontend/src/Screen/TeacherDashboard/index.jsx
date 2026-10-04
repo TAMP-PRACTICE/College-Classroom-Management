@@ -92,7 +92,6 @@ const TeacherDashboard = () => {
                                <Table responsive="sm" className='border-none' style={{borderRadius:"5px"}}>
         <thead>
           <tr>
-        
             <th colSpan={2}><GrFormSchedule className='fs-3' /> <span style={{ color: "rgb(43, 58, 103)" }} >Today's Teaching schedule</span> 
             <p className='text-muted'>Thursday 01,october</p></th>
             
