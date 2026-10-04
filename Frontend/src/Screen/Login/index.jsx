@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-
+  const naviagte=useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(role=='student'){
+      naviagte('/student-dashboard');
+    }else{
+      navigate('/teacher-dashboard');
+    }
     console.log({ role, email, password, rememberMe });
   };
 
@@ -92,12 +98,26 @@ const Login = () => {
                     <p style={{color:"rgb(150, 150, 150)"}} className='text-muted'>Your classes,sessions and schedule<br></br>-all in one place.</p>
                   </Col>
                   <Col className='d-flex justify-content-center gap-3'>
-                      <Button className='rounded-4 p-2 px-4 ' style={
+                  
+                       <Button className='rounded-4 p-2 px-4 ' style={
                         {
-                          backgroundColor:"rgb(43, 58, 103)"
+                          backgroundColor:(role==="student")?"rgb(43, 58, 103)":"#f8f9fa",
+                            color:
+                                 (role === "student") ? "white" : "rgb(150, 150, 150)",
                         }
-                      }><i class="bi bi-mortarboard-fill"></i> Students</Button>
-                       <Button className='rounded-4 p-2 px-4 bg-light ' style={{color:"rgb(150, 150, 150)"}} ><i style={{color:"rgb(150, 150, 150)"}} class="bi bi-person-fill"></i>Teachers</Button>
+                      } onClick={()=>setRole('student')}><i className="bi bi-mortarboard-fill"></i> Students</Button>
+                  
+                   
+                         <Button className='rounded-4 p-2 px-4' 
+                         style={
+                        {
+                          backgroundColor:(role==="teacher")?"rgb(43, 58, 103)":"#f8f9fa",
+                            color:
+                                 role === "teacher" ? "white" : "rgb(150, 150, 150)",
+                        }}
+                        onClick={()=>{setRole('teacher')}}><i style={{color:"rgb(150, 150, 150)"}} className="bi bi-person-fill"  ></i>Teachers</Button>
+                   
+                      
                   </Col>
                   <Col>
                       <Form onSubmit={handleSubmit}>
@@ -163,7 +183,7 @@ const Login = () => {
               </Form>
                 <div className="text-center mt-4">
                 <small className="text-muted">
-                  Not here? <Link to="/contact-admin" className="text-primary text-decoration-none">Contact to Admin</Link>
+                  Not here? <Link to={role==='student'?"/contact-admin":'/teacher-support'} className="text-primary text-decoration-none">Contact to Admin</Link>
                 </small>
               </div>
                   </Col>
