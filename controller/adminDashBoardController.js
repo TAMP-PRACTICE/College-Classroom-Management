@@ -17,13 +17,13 @@ module.exports.RegisterStudent = async (req, res) => {
             rollNo,
             password: hashedPassword
         })
-       const classs =  await Class.findOne({ ClassName: classId });
+       const classs =  await Class.findOne({ className: classId });
        const studentSubject = await Subject.findOne({ subjectName: subject, classId: classs._id });
        if(!studentSubject){
         return res.status(404).json({message:'This subject is not available for this class'})
        }
        newStudent.subject = studentSubject._id;
-       newStudent.class = classs._id;
+       newStudent.classId = classs._id;
         console.log('after student instance')
 
        
