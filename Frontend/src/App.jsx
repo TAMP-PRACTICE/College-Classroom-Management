@@ -12,6 +12,8 @@ import ClassManagement from "./Screen/ClassManagement";
 import Students from "./Screen/Students";
 import Announcements from "./Screen/Announcements";
 import DashboardBody from "./Screen/DashboardBody";
+import AdminDashboard from "./Screen/AdminDashboard";
+import AdminMain from "./Screen/AdminMain";
 function App() {
   return (
     <>
@@ -26,6 +28,9 @@ function App() {
         <Route path="class-management" element={<ClassManagement/>}/>
         <Route path="students" element={<Students/>}/>
         <Route path="announcements" element={<Announcements/>}/>
+      </Route>
+      <Route path="/admin-dashboard" element={<AdminDashboard/>}>
+        <Route path="dashboard" element={<AdminMain/>}></Route>
       </Route>
     <Route path="/contact-admin" element={<Studentsupport/>}></Route>
     <Route path='/teacher-support' element={<TeacherSupport/>}></Route>
