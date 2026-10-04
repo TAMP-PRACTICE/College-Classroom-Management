@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {RegisterStudent} = require('../controller/adminDashBoardController')
+const {RegisterStudent,RegisterTeacher} = require('../controller/adminDashBoardController')
 
-router.post('/',RegisterStudent)
+router.post('/studentRegister',RegisterStudent);
+
+router.post("/teacherRegister",RegisterTeacher)
+
 
 module.exports = router;

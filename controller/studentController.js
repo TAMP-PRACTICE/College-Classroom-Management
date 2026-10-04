@@ -37,11 +37,11 @@ const forgetPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const student =await Student.findOne({ email: email });
-    const resetPasswordToken = crypto.randomBytes(process.env.SALT_ROUND);
+    const resetPasswordToken = crypto.randomBytes(Number(process.env.SALT_ROUND));
     const resetPasswordTime = Date.now() + 10 * 60 * 1000;
     student.resetPasswordToken = resetPasswordToken;
     student.resetPasswordTime = resetPasswordTime;
-   await Student.save();
+   await Student.updateOne({email},{$set:{student}});
     const resetLink = `http://localhost:3000.com/resetPassword/${resetPasswordToken}`;
     const info = await transporter.sendMail({
       from: process.env.SenderMail,
@@ -56,12 +56,7 @@ const forgetPassword = async (req, res) => {
 
     <br>
     <br>
-
-    <p>if you don't request for forget password. ignore this mail</>
-
-    
-    
-    `,
+    <p>if you don't request for forget password. ignore this mail</> `,
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -69,6 +64,7 @@ const forgetPassword = async (req, res) => {
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   } catch (err) {
     console.error("Error while sending mail:", err);
+    res.status(500).send("Error occured in sending forget password email")
   }
 };
 

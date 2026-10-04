@@ -17,7 +17,7 @@ const timeSlotsSchema=mongoose.Schema({
     ]
 
     },
-    entTime:{
+    endTime:{
         type:String,
         required:true,
         enum:[

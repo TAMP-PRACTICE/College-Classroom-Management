@@ -7,6 +7,7 @@ const Subject=require("../Models/subject.js");
 const Room=require("../Models/room.js")
 const Timeslots=require("../Models/timeSlots.js")
 const Schedule=require("../Models/schedule.js");
+const Class=require("../Models/class.js")
 
 
 const teacherLogin=async(req,res)=>{
@@ -97,6 +98,8 @@ const bookSlot=async (req,res)=>{
         res.send("Error occured in slot allocation");
     }      
 }
+
+
 
 module.exports={teacherLogin,bookSlot};
 
