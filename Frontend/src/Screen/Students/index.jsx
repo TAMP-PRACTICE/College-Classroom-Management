@@ -1,13 +1,13 @@
 import React from 'react'
 import {Row,Col} from "react-bootstrap"
-const MyClasses = () => {
+const Students = () => {
   return (
-    <>
+   <>
     <Col className='' style={{ backgroundColor: "rgb(247, 249, 253)" }}>
-    <h1>Myclasses</h1>
+    <h1>Students</h1>
     </Col>
     </>
   )
 }
 
-export default MyClasses
+export default Students

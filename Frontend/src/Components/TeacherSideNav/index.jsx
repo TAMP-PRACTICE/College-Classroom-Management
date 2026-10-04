@@ -16,7 +16,7 @@ const TeacherSideNav = () => {
    className="flex-column gap-2 navlinks" // gap-2 adds clean spacing between menu tabs
                             >
     <Nav.Item>
-     <Nav.Link eventKey="dashboard" as={Link} to="/teacher-dashboard" className="d-flex align-items-center py-2 px-3">
+     <Nav.Link eventKey="dashboard" as={Link} to="/teacher-dashboard/dashboard" className="d-flex align-items-center py-2 px-3">
                <IoHomeOutline className="me-3 fs-5" /> Dashboard
                </Nav.Link>
       </Nav.Item>

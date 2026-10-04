@@ -1,19 +1,31 @@
 import { Route,Routes } from "react-router-dom";
-import {Container,Row,Col} from "react-bootstrap";
-import NavBar from "./Components/Navbar";
 import Login from "./Screen/Login";
 import Studentsupport from "./Screen/Studentsupport";
 import TeacherSupport from "./Screen/TeacherSupport";
 import ForgotPassword from "./Screen/ForgotPassword";
 import TeacherDashboard from "./Screen/TeacherDashboard";
 import MyClasses from "./Screen/MyClasses";
+import TeacherSchedule from "./Screen/TeacherSchedule";
+import Rooms from "./Screen/Rooms";
+import ScheduleRequests from "./Screen/ScheduleRequests";
+import ClassManagement from "./Screen/ClassManagement";
+import Students from "./Screen/Students";
+import Announcements from "./Screen/Announcements";
+import DashboardBody from "./Screen/DashboardBody";
 function App() {
   return (
     <>
     <Routes>
       <Route path="/" element={<Login/>}></Route>
       <Route path='/teacher-dashboard' element={<TeacherDashboard/>}>
+        <Route path="dashboard" element={<DashboardBody/>}></Route>
         <Route path='my-classes' element={<MyClasses></MyClasses>}></Route>
+        <Route path='schedule' element={<TeacherSchedule/>}></Route>
+        <Route path='rooms' element={<Rooms/>}></Route>
+        <Route path="schedule-requests" element={<ScheduleRequests/>}></Route>
+        <Route path="class-management" element={<ClassManagement/>}/>
+        <Route path="students" element={<Students/>}/>
+        <Route path="announcements" element={<Announcements/>}/>
       </Route>
     <Route path="/contact-admin" element={<Studentsupport/>}></Route>
     <Route path='/teacher-support' element={<TeacherSupport/>}></Route>
