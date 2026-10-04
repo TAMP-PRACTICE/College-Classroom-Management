@@ -37,6 +37,7 @@ const forgetPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const student =await Student.findOne({ email: email });
+
     if(!student){
      return res.status(404).json({"message" :"user not found"})
     }
@@ -46,7 +47,9 @@ const forgetPassword = async (req, res) => {
     student.resetPasswordTime = resetPasswordTime;
    await student.save();
     const resetLink = `http://localhost:3000/student/resetPassword/${resetPasswordToken}`;
-    const info = await transporter.sendMail({
+      
+    
+      const info = await transporter.sendMail({
       from: process.env.SenderMail,
       to: req.body.email,
       subject: "forget Psssword Request From CampusSync ",
@@ -54,17 +57,12 @@ const forgetPassword = async (req, res) => {
       html: `
     <h2>Hello Dear ! </h2>
     <p>hey ! this Mail is Regarding your Forget Password request if you make this request click the Below Given button</p>
-    <
+    <p>This Link is valid for 10 minutes only</p>
     <a href='${resetLink}'> Reset Password</a>
 
     <br>
     <br>
-
-    <p>if you don't request for forget password. ignore this mail</>
-
-    
-    
-    `,
+    <p>if you don't request for forget password. ignore this mail</> `,
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -72,6 +70,7 @@ const forgetPassword = async (req, res) => {
     // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   } catch (err) {
     console.error("Error while sending mail:", err);
+    res.status(500).send("Error occured in sending forget password email")
   }
 };
 
