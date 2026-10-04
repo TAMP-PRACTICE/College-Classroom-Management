@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { fetchDataPost } from '../../APIs';
 const Login = () => {
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
@@ -9,8 +10,34 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const naviagte=useNavigate();
+  const [loginSuccess,setLoginSuccess]=useState(false);
+
+  const loginHandler=async()=>{
+
+    try{
+      if(role=="student"){
+      const response=await fetchDataPost("http://localhost:3000/student/login");
+      }else{
+        const response=await fetchDataPost("http://localhost:3000/teacher/login");
+      }
+      const result=JSON.parse(response);
+      if(result.success){
+        setLoginSuccess(true);
+      }else{
+        console.log("unsuccessfull login");
+      }
+
+    }catch(err){
+      console.log(err);
+    }
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    loginHandler();
+
+    if(loginSuccess){
     if(role=='student'){
       naviagte('/student-dashboard');
     }else{
@@ -18,6 +45,9 @@ const Login = () => {
     }
     console.log({ role, email, password, rememberMe });
   };
+  return;
+}
+
 
   return (
     <div>
