@@ -1,6 +1,6 @@
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
-const secretKey=process.env.secretKey;
+const secretKey=process.env.JWTSECRET;
 const Student = require("../Models/student.js")
 const Teacher = require('../Models/teacher.js')
 const Subject=require("../Models/subject.js");
@@ -13,6 +13,7 @@ const Class=require("../Models/class.js")
 const teacherLogin=async(req,res)=>{
 
     const {email,password}=req.body;
+    console.log(email,password);
 
     try{
         const getTeacher=await Teacher.findOne({email:email});
@@ -31,7 +32,7 @@ const teacherLogin=async(req,res)=>{
 
             const token=jwt.sign({email:email},secretKey,{expiresIn:200});
             res.cookie("teacherLoginToken",token,{maxAge:40000});
-            res.status(200).send("Teacher logged in successfully");
+            res.status(200).json({message:"Teacher logged in successfully"});
             }catch(err){
         console.log("Error occured in teacher login",err);
         res.status(500).send("Error occured in teacher login");
