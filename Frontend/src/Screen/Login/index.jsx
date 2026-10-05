@@ -146,8 +146,7 @@ const Login = () => {
                                  role === "teacher" ? "white" : "rgb(150, 150, 150)",
                         }}
                         onClick={()=>{setRole('teacher')}}><i style={{color:"rgb(150, 150, 150)"}} className="bi bi-person-fill"  ></i>Teachers</Button>
-                   
-                      
+                     
                   </Col>
                   <Col>
                       <Form onSubmit={handleSubmit}>
@@ -167,7 +166,6 @@ const Login = () => {
                     />
                   </InputGroup>
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-semibold text-dark small">Password</Form.Label>
                   <InputGroup className="rounded-3 border overflow-hidden">

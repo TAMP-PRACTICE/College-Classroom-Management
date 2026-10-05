@@ -1,17 +1,18 @@
-import { Container, Row, Col} from "react-bootstrap";
-import TeacherSideNav from '../../Components/TeacherSideNav';
+import React from 'react'
 import { Outlet } from 'react-router-dom';
-const TeacherDashboard = () => {
-    return (
-        <>
-            <Container fluid>
+import { Container, Row, Col} from "react-bootstrap";
+import AdminNav from '../../Components/AdminNav';
+const AdminDashboard = () => {
+  return (
+    <>
+         <Container fluid>
                 <Row>
                     <Col md={2} className='' style={{ backgroundColor: "rgb(234, 241, 255)", height: "100dvh",top:"0",position:"sticky" }}>
                         <div>
                             <img src="/logo.png" style={{ maxWidth: '100px' }} alt="" />
                         </div>
                         <Col>
-                           <TeacherSideNav/>
+                           <AdminNav/>
 
                         </Col>
 
@@ -21,8 +22,8 @@ const TeacherDashboard = () => {
                 </Row>
 
             </Container>
-        </>
-    )
+    </>
+  )
 }
 
-export default TeacherDashboard
+export default AdminDashboard

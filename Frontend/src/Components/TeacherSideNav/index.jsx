@@ -13,7 +13,7 @@ const TeacherSideNav = () => {
      <Nav variant="pills"
 // activeKey={activeKey}   // onSelect={(selectedKey) => setActiveKey(selectedKey)}
 // 
-   className="flex-column gap-2 navlinks" // gap-2 adds clean spacing between menu tabs
+   className="flex-column gap-2 navlinks"
                             >
     <Nav.Item>
      <Nav.Link eventKey="dashboard" as={Link} to="/teacher-dashboard/dashboard" className="d-flex align-items-center py-2 px-3">
