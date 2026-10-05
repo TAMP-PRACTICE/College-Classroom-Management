@@ -8,13 +8,13 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const naviagte=useNavigate();
+  const navigate=useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     if(role=='student'){
-      naviagte('/student-dashboard');
+      navigate('/student-dashboard');
     }else{
-      navigate('/teacher-dashboard');
+      navigate('/teacher-dashboard/dashboard');
     }
     console.log({ role, email, password, rememberMe });
   };
