@@ -14,11 +14,12 @@ import Announcements from "./Screen/Announcements";
 import DashboardBody from "./Screen/DashboardBody";
 import AdminDashboard from "./Screen/AdminDashboard";
 import AdminMain from "./Screen/AdminMain";
+import StudentDashboard from "./Screen/StudentDashboard";
 function App() {
   return (
     <>
     <Routes>
-      <Route path="/login" element={<Login/>}></Route>
+      <Route path="/" element={<Login/>}></Route>
       <Route path='/teacher-dashboard' element={<TeacherDashboard/>}>
         <Route path="dashboard" element={<DashboardBody/>}></Route>
         <Route path='my-classes' element={<MyClasses></MyClasses>}></Route>
@@ -32,6 +33,7 @@ function App() {
       <Route path="/admin-dashboard" element={<AdminDashboard/>}>
         <Route path="dashboard" element={<AdminMain/>}></Route>
       </Route>
+    <Route path="/student-dashboard" element={<StudentDashboard/>}></Route>
     <Route path="/contact-admin" element={<Studentsupport/>}></Route>
     <Route path='/teacher-support' element={<TeacherSupport/>}></Route>
     <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
