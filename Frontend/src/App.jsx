@@ -18,7 +18,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path="/" element={<Login/>}></Route>
+      <Route path="/login" element={<Login/>}></Route>
       <Route path='/teacher-dashboard' element={<TeacherDashboard/>}>
         <Route path="dashboard" element={<DashboardBody/>}></Route>
         <Route path='my-classes' element={<MyClasses></MyClasses>}></Route>

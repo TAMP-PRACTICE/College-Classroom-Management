@@ -8,6 +8,8 @@ import { CiLocationOn } from "react-icons/ci";
 import { GrUserManager } from "react-icons/gr";
 import { FaRegUserCircle } from "react-icons/fa";
 import { Row, Col, Table, Card,Button } from "react-bootstrap";
+import EnrollmentChart from '../../Components/EnrollmentChart';
+import DistributionChart from '../../Components/DistributionChart';
 const AdminMain = () => {
     return (
         <>
@@ -62,18 +64,16 @@ const AdminMain = () => {
                         </div>
                     </Col>
                 </Row>
-                <Row className='m-3'>
+                <Row className='m-3 d-flex g-2 justify-space-between'>
                     <Col md={6}>
                         <Card>
-                            <h1>
-                                Enrollment Trend
-                            </h1>
+                            <EnrollmentChart/>
                         </Card>
                     </Col>
 
                     <Col md={6}>
                         <Card >
-                            <h1>Class wise Distribution</h1>
+                          <DistributionChart/>
                         </Card>
                     </Col>
                 </Row>
@@ -102,7 +102,7 @@ const AdminMain = () => {
                                     <td>Table cell</td>
                                     <td></td>
                                     <td></td>
-                                    <td><Button variant="outline-light"><RiDeleteBin6Line /></Button></td>
+                                    <td><Button variant=""><RiDeleteBin6Line /></Button></td>
                                 </tr>
                                 <tr>
 
@@ -112,7 +112,7 @@ const AdminMain = () => {
                                     <td>Table cell</td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+                                    <td><Button variant=""><RiDeleteBin6Line /></Button></td>
                                 </tr>
                                 <tr>
                                     <td><FaRegUserCircle />3</td>
@@ -121,7 +121,7 @@ const AdminMain = () => {
                                     <td>Table cell</td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+                                    <td><Button variant=""><RiDeleteBin6Line /></Button></td>
                                 </tr>
                             </tbody>
                         </Table>
