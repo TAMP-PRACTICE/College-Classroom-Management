@@ -9,22 +9,24 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const naviagte=useNavigate();
+  const navigate=useNavigate();
   const [loginSuccess,setLoginSuccess]=useState(false);
+  const [error,setError]=useState("");
 
   const loginHandler=async()=>{
-
+    let response;
     try{
       if(role=="student"){
-      const response=await fetchDataPost("http://localhost:3000/student/login");
+       response=await fetchDataPost("http://localhost:3000/student/login",{email,password});
       }else{
-        const response=await fetchDataPost("http://localhost:3000/teacher/login");
+         response=await fetchDataPost("http://localhost:3000/teacher/login",{email,password});
       }
-      const result=JSON.parse(response);
-      if(result.success){
-        setLoginSuccess(true);
+      //const result=JSON.parse(response);
+      if(response.success){
+        return true;
       }else{
         console.log("unsuccessfull login");
+        return false;
       }
 
     }catch(err){
@@ -34,17 +36,18 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    loginHandler();
-
-    if(loginSuccess){
+    const success=loginHandler();
+    if(success===true){
     if(role=='student'){
-      naviagte('/student-dashboard');
+      navigate('/student-dashboard');
     }else{
-      navigate('/teacher-dashboard');
+      navigate('/teacher-dashboard/dashboard');
     }
     console.log({ role, email, password, rememberMe });
-  };
+  }else{
+      console.log("unsuccessfull login");
+      setError("email or password wrong");
+  }
   return;
 }
 
@@ -208,6 +211,7 @@ const Login = () => {
                 >
                   Login <i className="bi bi-arrow-right"></i>
                 </Button>
+                <span style={{color:"red"}}>{error}</span>
               </Form>
                 <div className="text-center mt-4">
                 <small className="text-muted">

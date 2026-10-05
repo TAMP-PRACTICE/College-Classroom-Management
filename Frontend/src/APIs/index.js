@@ -1,33 +1,32 @@
 
+import axios from "axios";
+
 export async function fetchDataPost(API_URL,newData){
 
-    try{
-        const response=await fetch(API_URL,
-            {
-                method:"POST",
-                headers:{
-                    "content-type":"application/json"
-                },
-                body:JSON.stringify(newData)   
-            }
-        );
-        if(!response.ok){
-            throw new Error(`API Error:${response.status}`);
+    try {
+    const response = await axios.post(API_URL, newData);
 
-        }
-        const result=await response.json();
-        return {
-            success:true,
-            data:result
-        }
+    console.log("response in axios part:", response);
 
-    }catch(err){
-        console.log(err);
-        return{
+    const result = response.data;
+
+    if (response.status !== 200) {
+        throw new Error(`API Error: ${response.status}`);
+    }
+
+    return {
+        success:true,
+        data:result.message
+    }
+    console.log(result);
+
+} catch (error) {
+    console.log(error);
+      return{
             success:false,
             data:null
         }
-    }
-}
 
+}
+}
 
