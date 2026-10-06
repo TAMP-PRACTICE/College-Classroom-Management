@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Row, Table, Card, Button } from "react-bootstrap";
 import { BsBook } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 const TeacherSchedule = () => {
   const timeSlots = ["09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "01:00 - 02:00", "02:00 - 03:00"];
   const schedule = [
@@ -81,7 +82,7 @@ const TeacherSchedule = () => {
             </Card.Body>
           </Card>
 
-          <Button variant="" style={{ backgroundColor: "#1508a7", color: "#ffffff" }} className="w-100 py-2">+ Add New Class</Button>
+          <Button as={Link} to="/teacher-dashboard/schedule-requests" variant="" style={{ backgroundColor: "#1508a7", color: "#ffffff" }} className="w-100 py-2">+ Add New Class</Button>
         </Col>
       </Row>
     </Col>
