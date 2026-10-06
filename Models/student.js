@@ -30,8 +30,6 @@ const studentSchema=mongoose.Schema({
     },
     resetPasswordToken:{
         type :String,
-    },resetPasswordToken:{
-        type :String,
     },
     resetPasswordTime:{
         type :Date

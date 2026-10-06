@@ -8,7 +8,7 @@ router.post('/login',studentLogin);
 
 router.post('/forgetPassword',forgetPassword)
 
-router.post('/resetPassword/:token',resetPassword)
+router.get('/resetPassword/:token',resetPassword)
 
 // router.put('/:id',)
 module.exports = router;

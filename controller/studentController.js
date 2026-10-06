@@ -37,13 +37,19 @@ const forgetPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const student =await Student.findOne({ email: email });
-    const resetPasswordToken = crypto.randomBytes(Number(process.env.SALT_ROUND));
+
+    if(!student){
+     return res.status(404).json({"message" :"user not found"})
+    }
+    const resetPasswordToken = crypto.randomBytes(Number(process.env.SALT_ROUND)).toString("hex");
     const resetPasswordTime = Date.now() + 10 * 60 * 1000;
     student.resetPasswordToken = resetPasswordToken;
     student.resetPasswordTime = resetPasswordTime;
-   await Student.updateOne({email},{$set:{student}});
-    const resetLink = `http://localhost:3000.com/resetPassword/${resetPasswordToken}`;
-    const info = await transporter.sendMail({
+   await student.save();
+    const resetLink = `http://localhost:3000/student/resetPassword/${resetPasswordToken}`;
+      
+    
+      const info = await transporter.sendMail({
       from: process.env.SenderMail,
       to: req.body.email,
       subject: "forget Psssword Request From CampusSync ",
@@ -51,8 +57,8 @@ const forgetPassword = async (req, res) => {
       html: `
     <h2>Hello Dear ! </h2>
     <p>hey ! this Mail is Regarding your Forget Password request if you make this request click the Below Given button</p>
-    <
-    <a href="${resetLink}">Reset Password</a>
+    <p>This Link is valid for 10 minutes only</p>
+    <a href='${resetLink}'> Reset Password</a>
 
     <br>
     <br>
@@ -61,7 +67,7 @@ const forgetPassword = async (req, res) => {
 
     console.log("Message sent: %s", info.messageId);
     // Preview URL is only available when using an Ethereal test account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   } catch (err) {
     console.error("Error while sending mail:", err);
     res.status(500).send("Error occured in sending forget password email")
@@ -73,17 +79,17 @@ const resetPassword = async(req,res)=>{
     try{
     const {token} = req.params;
     const {newPassword} = req.body;
-    const student = Student.find({
+    const student =await Student.findOne({
         resetPasswordToken  : token,
         resetPasswordTime :{ $gt : Date.now()}
     })
   if (!student) {
     return res.status(400).json({ message: "Invalid or expired token" });
   }else{
-    Student.password = await bcrypt.hash(newPassword, 10);
-    Student.resetPasswordToken = undefined;
-    Student.resetPasswordTime = undefined;
-    await Student.save();
+    student.password = await bcrypt.hash(newPassword, Number(process.env.SALT_ROUND));
+    student.resetPasswordToken = undefined;
+    student.resetPasswordTime = undefined;
+    await student.save();
      
   }
 } catch (error) {
