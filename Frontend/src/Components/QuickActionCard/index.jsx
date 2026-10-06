@@ -12,7 +12,6 @@ const QuickActionCard = () => {
       <Card className="border-0 shadow-sm p-3" style={{ width: '400px', borderRadius: '15px' }}>
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h6 className="fw-bold m-0 d-flex align-items-center gap-2">
-       {/* <FaBoltLightning  className="text-warning" /> */}
        <i className="bi bi-lightning"></i> Quick Actions
         </h6>
         <Button variant="link" className="text-decoration-none btn-sm p-0">View All &rarr;</Button>

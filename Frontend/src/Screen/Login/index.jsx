@@ -1,23 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { fetchDataPost } from '../../APIs';
 const Login = () => {
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const naviagte=useNavigate();
-  const handleSubmit = (e) => {
+  const navigate=useNavigate();
+  const [loginSuccess,setLoginSuccess]=useState(false);
+  const [error,setError]=useState("");
+
+  const loginHandler=async()=>{
+    let response;
+    try{
+      if(role=="student"){
+       response=await fetchDataPost("http://localhost:3000/student/login",{email,password});
+      }else{
+         response=await fetchDataPost("http://localhost:3000/teacher/login",{email,password});
+      }
+      //const result=JSON.parse(response);
+      console.log(response);
+
+      return response.success;
+
+      // if(response.success==true){
+      //   return true;
+      // }else{
+      //   console.log("unsuccessfull login");
+      //   return false;
+      // }
+
+    }catch(err){
+      console.log(err);
+    }
+  }
+  
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    const success=await loginHandler();
+    if(success===true){
+      setError("");
     if(role=='student'){
-      naviagte('/student-dashboard');
+      navigate('/student-dashboard');
     }else{
-      navigate('/teacher-dashboard');
+      navigate('/teacher-dashboard/dashboard');
     }
     console.log({ role, email, password, rememberMe });
-  };
+  }else{
+      console.log("unsuccessfull login");
+      setError("email or password wrong");
+  }
+  return;
+}
+
 
   return (
     <div>
@@ -116,8 +154,7 @@ const Login = () => {
                                  role === "teacher" ? "white" : "rgb(150, 150, 150)",
                         }}
                         onClick={()=>{setRole('teacher')}}><i style={{color:"rgb(150, 150, 150)"}} className="bi bi-person-fill"  ></i>Teachers</Button>
-                   
-                      
+                     
                   </Col>
                   <Col>
                       <Form onSubmit={handleSubmit}>
@@ -137,7 +174,6 @@ const Login = () => {
                     />
                   </InputGroup>
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-semibold text-dark small">Password</Form.Label>
                   <InputGroup className="rounded-3 border overflow-hidden">
@@ -180,6 +216,7 @@ const Login = () => {
                 >
                   Login <i className="bi bi-arrow-right"></i>
                 </Button>
+                <span style={{color:"red"}}>{error}</span>
               </Form>
                 <div className="text-center mt-4">
                 <small className="text-muted">
