@@ -26,7 +26,7 @@ const studentLogin = async (req, res) => {
 
     const token = jwt.sign({ email: email }, secretKey, { expiresIn: 200 });
     res.cookie("studentLoginToken", token, { maxAge: 40000 });
-    return res.send("Student Login successfully");
+    return res.status(200).json({message:"Student Login successfully"});
   } catch (err) {
     console.log("Error occured in student Login", err);
     res.status(500).send("Server Error");

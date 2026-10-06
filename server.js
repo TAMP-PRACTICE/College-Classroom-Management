@@ -1,4 +1,6 @@
+const dns = require("dns");
 
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 const express = require('express');
 require('dotenv').config();
 const cron=require("node-cron");
@@ -7,9 +9,11 @@ const app = express();
 const mongoose = require('mongoose');
 
 const cookieparser  = require('cookie-parser')
+const cors=require("cors");
 app.use(cookieparser());
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cors());
 //routes
  const teacherRoute = require('./router/teacherRoute')
  const studentRoute = require('./router/studentRoute.js')
