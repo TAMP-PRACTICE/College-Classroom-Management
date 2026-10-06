@@ -22,22 +22,27 @@ const Login = () => {
          response=await fetchDataPost("http://localhost:3000/teacher/login",{email,password});
       }
       //const result=JSON.parse(response);
-      if(response.success){
-        return true;
-      }else{
-        console.log("unsuccessfull login");
-        return false;
-      }
+      console.log(response);
+
+      return response.success;
+
+      // if(response.success==true){
+      //   return true;
+      // }else{
+      //   console.log("unsuccessfull login");
+      //   return false;
+      // }
 
     }catch(err){
       console.log(err);
     }
   }
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const success=loginHandler();
+    const success=await loginHandler();
     if(success===true){
+      setError("");
     if(role=='student'){
       navigate('/student-dashboard');
     }else{
