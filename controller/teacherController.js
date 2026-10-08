@@ -30,9 +30,12 @@ const teacherLogin=async(req,res)=>{
                 return res.status(401).send("Wrong password");
             }
 
-            const token=jwt.sign({email:email},secretKey,{expiresIn:200});
+            const token=jwt.sign({email:email,teacherName:getTeacher.teacherName},secretKey,{expiresIn:200});
             res.cookie("teacherLoginToken",token,{maxAge:40000});
-            res.status(200).json({message:"Teacher logged in successfully"});
+            res.status(200).json({message:"Teacher logged in successfully",
+                teacherId:getTeacher._id,
+                teacherName:getTeacher.teacherName
+            });
             }catch(err){
         console.log("Error occured in teacher login",err);
         res.status(500).send("Error occured in teacher login");
@@ -100,9 +103,27 @@ const bookSlot=async (req,res)=>{
     }      
 }
 
+const teacherDashboard=async (req,res)=>{
+
+    try{
+        const {id}=req.params;
+        const teacherInfo=req.teacherLogin;
+            const scheduleData=await Schedule.findOne({teacher:id});
+
+            res.status(200).json(
+                {schedule:scheduleData,
+                    teacherInfo:teacherInfo});
+    
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"Internal server error"});
+    }
+}
 
 
-module.exports={teacherLogin,bookSlot};
+
+module.exports={teacherLogin,bookSlot,teacherDashboard};
 
 
 
