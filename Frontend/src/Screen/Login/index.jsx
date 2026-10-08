@@ -24,7 +24,7 @@ const Login = () => {
       //const result=JSON.parse(response);
       console.log(response);
 
-      return response.success;
+      return response;
 
       // if(response.success==true){
       //   return true;
@@ -40,13 +40,14 @@ const Login = () => {
   
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const success=await loginHandler();
-    if(success===true){
+    const response=await loginHandler();
+    console.log("res[onse:",response);
+    if(response.success===true){
       setError("");
     if(role=='student'){
       navigate('/student-dashboard');
     }else{
-      navigate('/teacher-dashboard/dashboard');
+      navigate('/teacher-dashboard/dashboard',{ state: { user: response.data } });
     }
     console.log({ role, email, password, rememberMe });
   }else{

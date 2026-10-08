@@ -3,15 +3,37 @@ import {
      BsBook,
     BsPeople
 } from 'react-icons/bs';
+import { useState,useEffect } from 'react';
 import { GoClock,GoArrowRight } from "react-icons/go";
 import { GrFormSchedule } from "react-icons/gr";
 import { IoBookOutline } from "react-icons/io5";
 import { Row, Col, Button,Table } from "react-bootstrap";
 import TeacherCard from '../../Components/TeacherCard';
-
+import { useLocation } from 'react-router-dom';
 import QuickActionCard from '../../Components/QuickActionCard';
+import { fetchDataGet } from '../../APIs';
 
 const DashboardBody = () => {
+  const [teacherData,setTeacherData]=useState([]);
+  const location=useLocation();
+  const user=location.state?.user;
+ useEffect(() => {
+  const getTeacherData = async () => {
+    try {
+      console.log(user);
+      const response = await fetchDataGet(
+        `http://localhost:3000/teacher/teacherDashboard/${user.teacherId}`
+      );
+
+      console.log(response);
+      setTeacherData(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  getTeacherData();
+}, []);
   return (
     <>   <Col className='' style={{ backgroundColor: "rgb(247, 249, 253)" }}>
                         <Row>
