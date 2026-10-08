@@ -12,7 +12,10 @@ const cors=require("cors");
 app.use(cookieparser());
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 //routes
  const teacherRoute = require('./router/teacherRoute')
  const studentRoute = require('./router/studentRoute.js')

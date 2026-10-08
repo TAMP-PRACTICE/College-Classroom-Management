@@ -1,5 +1,5 @@
 const jwt=require("jsonwebtoken");
-const secretKey=process.env.secretKey;
+const secretKey=process.env.JWTSECRET;
 
 const jwtStudentMiddleware=async(req,res,next)=>{
 
@@ -31,21 +31,21 @@ const jwtTeacherMiddleware=async(req,res,next)=>{
     const teacherLoginToken=req.cookies.teacherLoginToken;
 
     if(!teacherLoginToken){
-        return res.status(404).send("Login required first ")
+        return res.status(404).json({message:"Login required first "})
     }
 
     try{
         const teacherToken=jwt.verify(teacherLoginToken,secretKey);
         
         if(!teacherToken){
-           return res.status(500).send("Login session is expired");
+           return res.status(500).json({message:"Login session is expired"});
         }
         console.log("Login token verified",teacherToken);
         req.teacherLogin=teacherToken;
         next();
     }catch(err){
         console.log("Error occured in jwt token verfication in teacher",err);
-        res.status(500),send("Error occured in jwt token verification");
+        res.status(500).json({message:"Error occured in jwt token verification"});
     }
 }
 
