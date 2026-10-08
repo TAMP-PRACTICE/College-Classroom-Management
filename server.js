@@ -7,7 +7,6 @@ const cron=require("node-cron");
 
 const app = express();
 const mongoose = require('mongoose');
-
 const cookieparser  = require('cookie-parser')
 const cors=require("cors");
 app.use(cookieparser());
