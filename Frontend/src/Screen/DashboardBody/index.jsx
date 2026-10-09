@@ -33,12 +33,14 @@ const DashboardBody = () => {
   };
 
   getTeacherData();
-}, []);
+},[]);
   return (
-    <>   <Col className='' style={{ backgroundColor: "rgb(247, 249, 253)" }}>
+    <> 
+    {console.log(teacherData)}
+      <Col className='' style={{ backgroundColor: "rgb(247, 249, 253)" }}>
                         <Row>
                             <Col>
-                                <h1 style={{ color: "rgb(43, 58, 103)" }}>Good morning,Mr. Shrama</h1>
+                                <h1 style={{ color: "rgb(43, 58, 103)" }}>Good morning,{teacherData.teacherInfo.teacherName}</h1>
                                 <p className='text-muted'>Here's your schedule for today.</p>
                             </Col>
                             <Col>
@@ -55,7 +57,7 @@ const DashboardBody = () => {
                                 <div className='d-flex-column align-items-start p-2' style={{backgroundColor:"rgb(220, 237, 254)",border:"1px solid rgb(104, 207, 255)",borderRadius:"5px"}}>
                                     <GrFormSchedule className="me-3 fs-5" />
                                     <h3 style={{ color: "rgb(43, 58, 103)" }} >Today's Classes</h3>
-                                    <h4 style={{ color: "rgb(43, 58, 103)" }}>4</h4>
+                                    <h4 style={{ color: "rgb(43, 58, 103)" }}>{teacherData.schedule.classId}</h4>
                                     <p className='text-muted'></p>
                                 </div>
                             </Col>
